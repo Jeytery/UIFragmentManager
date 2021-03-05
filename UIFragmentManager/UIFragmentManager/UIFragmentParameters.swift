@@ -31,6 +31,8 @@ class UIFragmentParameters {
     public var maxHeight: Int = 2000
 
     public var maxWidth: Int = 2000
+    
+    public var presentType: PresentType = .topVC
 
     public var fragmentDiaposon: ClosedRange<Float> {
         get {
@@ -78,16 +80,17 @@ class UIFragmentParameters {
     
     }
 
-    public init(side: Side, intend: Int, edges: (bottom: Int, top: Int, left: Int, right: Int), layer: Int, effect: UIFragmentEffect, gesture: UIFragmentGesture, cornersCurves: (corners: UIRectCorner, radius: Float)) {
-          self.side = side
-          self.intend = intend
-          self.edges = edges
-          self.layer = layer
-          self.effect = effect
-          self.gesture = gesture
-          self.cornersCurves = cornersCurves
-          updateFragmentFrameData()
-      }
+    public init(side: Side, intend: Int, edges: (bottom: Int, top: Int, left: Int, right: Int), layer: Int, effect: UIFragmentEffect, gesture: UIFragmentGesture, cornersCurves: (corners: UIRectCorner, radius: Float), presentType: PresentType) {
+        self.side = side
+        self.intend = intend
+        self.edges = edges
+        self.layer = layer
+        self.effect = effect
+        self.gesture = gesture
+        self.cornersCurves = cornersCurves
+        self.presentType = presentType
+        updateFragmentFrameData()
+    }
 
     public func setSide(side: Side) {
         self.side = side

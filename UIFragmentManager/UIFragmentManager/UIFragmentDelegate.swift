@@ -29,6 +29,16 @@ class UIFragmentDelegate {
         self.fragmentVC.view.layer.mask = mask
     }
     
+    private func findTopController() -> UIViewController? {
+        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            return topController
+        }
+        return nil
+    }
+    
     public func showFrame(_ frame: FragmentData, _ fragmentVC: UIViewController) {
         UIView.animate(
         withDuration: 0.5,
@@ -74,8 +84,16 @@ class UIFragmentDelegate {
 
     public func show(completion: (() -> Void)?) {
         guard isToogled == false else { return }
+        
+        if parameters.presentType == .topVC {
+            if let topVC = findTopController() {
+                parentVC = topVC
+            } else {
+                parentVC = nil
+            }
+        }
+        
         if parentVC != nil {
-            print("parentVC is not nil")
             parentVC?.addChild(fragmentVC)
             parentVC?.view.addSubview(fragmentVC.view)
             parameters.effect.show(parentVC: parentVC!, fragmentVC: fragmentVC)

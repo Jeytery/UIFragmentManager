@@ -63,7 +63,7 @@ class BlackoutEffect: UIFragmentEffect {
 
     @objc func tapCloseGesture() {
         print("hide")
-        UIFragmentManager.shared.hide(fragmentVC: self.fragmentVC)
+        UIFragmentManager.shared.hide(fragmentVC: self.fragmentVC, completion: nil)
     }
 
     private func configureView() {

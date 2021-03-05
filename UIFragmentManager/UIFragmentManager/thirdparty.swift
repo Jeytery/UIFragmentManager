@@ -35,4 +35,8 @@ public enum MessageStyle {
     case strict
 }
 
+public enum PresentType {
+    case topVC
+    case alert
+}
 

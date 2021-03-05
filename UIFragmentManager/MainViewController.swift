@@ -18,7 +18,8 @@ class MainViewController: UIViewController {
                                      layer: 1,
                                      effect: BlackoutEffect(intensity: 0),
                                      gesture: SlideGesture(),
-                                     cornersCurves: (corners: [.allCorners], radius: 15)
+                                     cornersCurves: (corners: [.allCorners], radius: 15),
+                                     presentType: .alert
     )
 
     @IBAction func hide(_ sender: Any) {
@@ -31,8 +32,8 @@ class MainViewController: UIViewController {
     @IBAction func action(_ sender: Any) {
         fragmentVC = ChildViewController()
         fragmentVC!.view.backgroundColor = .cyan
-        //UIFragmentManager.shared.show(fragmentVC: fragmentVC!, parameters: param)
-        UIFragmentManager.shared.showOnVC(fragmentVC: fragmentVC!, parameters: param)
+        UIFragmentManager.shared.show(fragmentVC: fragmentVC!, parameters: param, completion: nil)
+        
     }
     
     override func viewDidLoad() {

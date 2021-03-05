@@ -22,7 +22,7 @@ class SlideGesture: UIFragmentGesture {
                 fragmentDelegate!.showFrame(fragmentDelegate!.parameters.fragmentData,fragmentDelegate!.fragmentVC)
                 fragmentDelegate!.parameters.effect.resetAlpha()
             } else {
-                UIFragmentManager.shared.hide(fragmentVC: fragmentDelegate!.fragmentVC)
+                UIFragmentManager.shared.hide(fragmentVC: fragmentDelegate!.fragmentVC, completion: nil)
             }
             break
         case .top:
@@ -30,21 +30,21 @@ class SlideGesture: UIFragmentGesture {
                 fragmentDelegate!.showFrame(fragmentDelegate!.parameters.fragmentData,fragmentDelegate!.fragmentVC)
                 fragmentDelegate!.parameters.effect.resetAlpha()
             } else {
-                UIFragmentManager.shared.hide(fragmentVC: fragmentDelegate!.fragmentVC)
+                UIFragmentManager.shared.hide(fragmentVC: fragmentDelegate!.fragmentVC, completion: nil)
             }
         case .left:
             if value + Float(fragmentDelegate!.parameters.edges.left) > Float(deadlock) - Float(idleState) { // maxX
                 fragmentDelegate!.showFrame(fragmentDelegate!.parameters.fragmentData,fragmentDelegate!.fragmentVC)
                 fragmentDelegate!.parameters.effect.resetAlpha()
             } else {
-                UIFragmentManager.shared.hide(fragmentVC: fragmentDelegate!.fragmentVC)
+                UIFragmentManager.shared.hide(fragmentVC: fragmentDelegate!.fragmentVC, completion: nil)
             }
         case .right:
             if value - Float(fragmentDelegate!.parameters.edges.right) < Float(deadlock) + Float(idleState) { // minX
                 fragmentDelegate!.showFrame(fragmentDelegate!.parameters.fragmentData,fragmentDelegate!.fragmentVC)
                 fragmentDelegate!.parameters.effect.resetAlpha()
             } else {
-                UIFragmentManager.shared.hide(fragmentVC: fragmentDelegate!.fragmentVC)
+                UIFragmentManager.shared.hide(fragmentVC: fragmentDelegate!.fragmentVC, completion: nil)
             }
         }
     }
@@ -69,7 +69,7 @@ class SlideGesture: UIFragmentGesture {
             return fragmentDelegate!.fragmentVC.view.frame.origin.x + translation.x
         case .top:
             let dframe = deadlock - fragmentDelegate!.fragmentVC.view.frame.maxY
-            if fragmentDelegate!.fragmentVC.view.frame.maxY > deadlock { return CGFloat(fragmentDelegate!.parameters.edges.top) } // guard >=
+            if fragmentDelegate!.fragmentVC.view.frame.maxY > deadlock { return CGFloat(fragmentDelegate!.parameters.edges.top) }
             else if translation.y > CGFloat(dframe) { return CGFloat(fragmentDelegate!.parameters.edges.top) }
             return fragmentDelegate!.fragmentVC.view.frame.origin.y + translation.y
         }
@@ -110,3 +110,13 @@ class SlideGesture: UIFragmentGesture {
         }
     }
 }
+
+
+class TestGesture: UIFragmentGesture {
+    override func gestureLogic(_ sender: UIPanGestureRecognizer) {
+        if sender.state == .changed {
+            print("test")
+        }
+    }
+}
+
